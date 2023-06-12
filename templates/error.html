@@ -1,0 +1,29 @@
+<title>Error</title>
+{% block body%}
+  <div style="text-align: center; margin-top: 100px;">
+    {% if error %}
+      <h1>An error occured </h1>
+      <h2>{{error}}</h2>
+      <p><a class="link-opacity-10" href="{{url_for('login')}}">Click here </a>if you are not automatically redirected</p>
+      <script>    
+        window.setTimeout(function(){
+      
+          // Move to a new location or you can do something else
+          window.location.href = "/login";
+      
+          }, 5000);
+      
+      </script>
+    {% else %}
+    <script>    
+      window.setTimeout(function(){
+    
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+    
+        }, 5000);
+    
+    </script>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+.hov:hover{
+    /* background-color: #179138!important; */
+    opacity: 0.8;
+}
+
+.login-pg, .index-pg{
+    min-height:100vh
+}
+
+footer {
+    background-color: #1b1c1c;
+}
+
+ul > .ms-3 {
+    font-size: 20px;
+}
+
+.short, .mid, .long{
+    /* height: 350px; */
+    /* overflow: auto;
+    scroll-behavior: smooth; */
+}
+.overflow-auto::-webkit-scrollbar{
+    width: 10px;
+}
+
+.overflow-auto::-webkit-scrollbar-track{
+    border-radius: 10px;
+    box-shadow: inset 1px 0 3px grey;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+    background: #1b1c1c;
+    border-radius: 10px;
+  }
+
+.overflow-auto{
+    height: 300px;
+}

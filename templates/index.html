@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    <div class="container pt-4 text-center index-pg">
+      {% if session['current_user'] %}
+        {% set current_user = session['current_user']%}
+      <div class="row">
+        <div class="image col">
+          <img src="{{current_user['images'][0].url}}" class="rounded-circle mx-auto d-block" alt="user image">
+        </div>
+        <div class="stats col pt-2">
+          <h4 class="">
+            {{current_user['display_name']}}
+          </h4>
+          <h6 class="pt-1">
+            {{current_user['email']}}
+          </h6>
+          <h6 class="pt-1">
+            {{current_user['followers'].total}} followers
+          </h6>
+          <h2 class="py-3">
+            Now Playing
+          </h2>
+          <div class="row">           
+              <div class="col">
+                <iframe class="iframe-track" src="https://open.spotify.com/embed/track/{{ currentlyPlaying }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      Fetching details. Please be patient. refresh page if taking too long
+      {% endif %}
+      <h2 class="py-3">
+        Your top tracks
+      </h2>
+      <div class="row mt-4 overflow-auto">
+        <div class="col short">
+          <h4>
+            Recent
+          </h4>
+          <div class="">
+            {% for track in topTracksShort%}
+            <div>
+              <iframe class="iframe-track" src="https://open.spotify.com/embed/track/{{ track }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+        <div class="col mid">
+          <h4>
+            Last 6 months
+          </h4>
+          <div class="">
+            {% for track in topTracksMid %}
+            <div>
+              <iframe class="iframe-track" src="https://open.spotify.com/embed/track/{{ track }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+        <div class="col long">
+          <h4>
+            Long term
+          </h4>
+          <div class="">
+            {% for track in topTracksLong %}
+            <div>
+              <iframe class="iframe-track" src="https://open.spotify.com/embed/track/{{ track }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+      <h2 class="mt-2">
+        Your top artists
+      </h2>
+      <div class="row mt-4 overflow-auto">
+        <div class="col short">
+          <h4>
+            Recent
+          </h4>
+          <div class="">
+            {% for artist in topArtistsShort%}
+            <div>
+              <iframe class="iframe-track" src="https://open.spotify.com/embed/artist/{{ artist }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+
+        <div class="col mid">
+          <h4>
+            Last 6 months
+          </h4>
+          <div class="">
+            {% for artist in topArtistsMid%}
+            <div>
+              <iframe class="iframe-track" src="https://open.spotify.com/embed/artist/{{ artist }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+
+        <div class="col long">
+          <h4>
+            Long term
+          </h4>
+          <div class="">
+            {% for artist in topArtistsLong%}
+            <div>
+              <iframe class="iframe-track" src="https://open.spotify.com/embed/artist/{{ artist }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+{% endblock %}

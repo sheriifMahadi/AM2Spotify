@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} log in {% endblock %}
+
+{% block body %}
+    <div class="container pt-5 text-center login-pg">
+
+    <h1>Apple music to Spotify</h1>
+
+    <div class="py-2 mt-1 mb-3 mx-auto opacity-75">
+        <p class="lead">
+            Import your songs and playlists 
+            from Apple Music to Spotify with ease
+          </p>
+    </div>
+    <div class="py-3 my-3 mx-auto">
+        <a class="btn btn-success hov py-2" style="background-color:#1c9e40" href="{{ auth_url }}" role="button">
+        <div class='d-flex align-items-center'>
+            <img src="static/spotifyIcon.png" alt="Spotify Icon" width="21px" height="21px" class="ms-1 me-2">
+            Sign in with Spotify
+        </div>
+    </a>
+    </div>
+    </div>
+
+{% endblock %}
