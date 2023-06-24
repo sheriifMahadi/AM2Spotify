@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} transfer playlist {% endblock %}
+
+{% block body%}
+        <div class="container pt-4 text-center index-pg">
+
+            <form action="{{url_for('transfer')}}" method="post">
+                <div class="row overflow-auto">
+                    <div class="py-2">
+                    <span class="opacity-50">
+                        {% if status == 'tracks' %}
+                            {{savedTracks|length}} Tracks
+                        {% else %}
+                            {{playlistItems|length}} Tracks   
+                        {% endif %}
+                    </span>
+                        <input class="form-check-input" type="checkbox" id="general" name="general_select" value="general" checked>
+                    </div>
+                    {% if status == 'tracks' %}
+                        {% for items in savedTracks %}
+                            <div class="col"> 
+                                <iframe class="iframe-track" src="https://open.spotify.com/embed/track/{{ items }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            </div>
+                            <div class="col">
+                                <input class="form-check-input" type="checkbox" id="playlist-{{items}}" name="playlist-item" value="{{items}}" checked>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for items in playlistItems %}
+                            <div class="col"> 
+                                <iframe class="iframe-track" src="https://open.spotify.com/embed/track/{{ items }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            </div>
+                            <div class="col">
+                                <input class="form-check-input" type="checkbox" id="playlist-{{items}}" name="playlist-item" value="{{items}}" checked>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="row" >
+                    <h1 class="pb-2">Target</h1>
+                    
+                    <div class="col"> 
+                        <div class="image-div onclick-target" >
+                            <img src="{{session['targetImage']}}" class="image-thumbnail" alt="user image">
+                        </div>
+                    </div>
+                    <div class="col pt-4">
+                        <span class="playlist-name onclick-target">
+                            {{session['targetName']}}
+                        </span>
+                    </div>
+                </div>
+                <div class="radio pb-4">
+                        <span class="pr-4 copy">
+                            <input class="form-check-input" type="radio" name="action" value="copy" id="copy">
+                            <label class="form-check-label" for="copy">
+                                Copy
+                            </label>
+                        </span>
+
+                        <span class="move pl-4">
+                            <input class="form-check-input" type="radio" name="action" id="move" value="move" checked>
+                            <label class="form-check-label" for="move">
+                                Move
+                            </label>
+                        </span>
+
+                </div>
+                <div class="buttn">
+                    <button type="submit" class="btn btn-success hov py-2" style="background-color:#1c9e40">
+                        Transfer
+                    </button>
+                </div>
+            </form>
+        </div>
+
+{% endblock %}

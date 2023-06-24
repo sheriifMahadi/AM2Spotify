@@ -12,6 +12,7 @@ app.add_url_rule('/upload', view_func=views.uploadFile, methods=['POST'])
 app.add_url_rule('/import', view_func=views.uploadtoSpotify, methods=['POST'])
 
 app.add_url_rule('/playlists', view_func=views.playlists, methods=['GET', 'POST'])
+app.add_url_rule('/playlists/transfer', view_func=views.transfer, methods=['GET', 'POST'])
 app.add_url_rule('/tutorial', view_func=views.tutorial)
 
 app.add_url_rule('/login', view_func=views.login)

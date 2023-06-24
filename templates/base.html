@@ -23,9 +23,9 @@
                 <div class="navbar-nav">
                   <a class="nav-link" href="{{url_for('tutorial')}}">Tutorial</a>
                   {% if session['logged_in']%}
-                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
                     <a class="nav-link" href="{{url_for('playlists')}}">Playlists</a>
                     <a class="nav-link" href="{{url_for('importSongs')}}">Import Songs</a>
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
                     {% else %}
                   {% endif %}
                 </div>

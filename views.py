@@ -2,17 +2,23 @@ import sys
 
 sys.path.append('..')
 import functools
+import json
+import os
 import time
 from urllib.parse import urlencode
-import os
-from werkzeug.utils import secure_filename
-from Applemusic_Spotify.json_data import getJsonData
-from flask import (make_response, redirect, render_template, request, session,
-                   url_for, flash)
 
-from util import (UPLOAD_PATH, AUTH_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, checkTokenStatus,
-                  createStateKey, fileName, getCurrentUser, getCurrentlyPlaying, getTopTracks, getTopArtists, refreshToken,
-                  tokenHeadersData, searchForSongs, addToLibrary, fileName)
+from Applemusic_Spotify.json_data import getJsonData
+from flask import (flash, make_response, redirect, render_template, request,
+                   session, url_for)
+from werkzeug.utils import secure_filename
+
+from util import (AUTH_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE,
+                  UPLOAD_PATH, addToLibrary, addToPlaylist, checkTokenStatus, createPlaylist,
+                  createStateKey, deletePlaylist, fileName,
+                  getCurrentlyPlaying, getCurrentUser, getPlaylistItems,
+                  getSavedTracks, getTopArtists, getTopTracks,
+                  getUserPlaylists, playListAction, refreshToken, searchForSongs,
+                  tokenHeadersData)
 
 
 def login_required(view):
@@ -89,10 +95,60 @@ def importSongs():
 
 @login_required
 def playlists():
-	return render_template('playlists.html')
+	if request.method == 'POST':
+		playlist_ids = request.form['playlistids']
+		if playlist_ids:
+			json_obj = json.loads(playlist_ids)
+
+			session['sourceId'] = json_obj['sourceId']
+			session['sourceName'] = json_obj['sourceName']
+			session['sourceImage'] = json_obj['sourceImage']
+
+			session['targetId'] = json_obj['targetId']
+			session['targetName'] = json_obj['targetName']
+			session['targetImage'] = json_obj['targetImage']
+
+
+		return {"message": "ok"}
+
+	savedTracks = getSavedTracks(session)
+	savedPlaylists = getUserPlaylists(session)
+
+	return render_template('playlists.html', 
+						savedTracks=savedTracks,
+						savedPlaylists=savedPlaylists
+	)
+
+@login_required
+def transfer():
+	if request.method == 'POST':
+		ids = request.form.getlist('playlist-item')
+		print(ids)
+		action = request.form['action']
+		playlistaction = playListAction(action, session, ids)
+		
+		if(playlistaction.get('msg') != None):
+			flash(f'{len(ids)} tracks have been added to {session["targetName"]}.')
+			return redirect(url_for('index'))
+		else:
+			return render_template('error.html', 
+			error='An error occured. Please make a selection and try again.')
+
+	playlistItems = getPlaylistItems(session)
+	savedTracks = getSavedTracks(session)
+	if playlistItems == None:
+		playlistItems = []
+	if session['sourceName'] == 'liked':
+		status = 'tracks'
+	else:
+		status = 'playlists'
+	return render_template('transfer.html', 
+	playlistItems=playlistItems, 
+	savedTracks=savedTracks,
+	status=status)
 
 def tutorial():
-	topTracksShort = getTopTracks(session, 'tracks', 'short_term')
+	topTracksShort = session['current_user']['id']
 	return render_template('tutorial.html', getTopTracks=topTracksShort)
 
 @check_login_status

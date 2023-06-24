@@ -2,4 +2,55 @@
 {% block title %} Playlist {% endblock %}
 
 {% block body%}
+    <div class="container pt-4 text-center index-pg">
+        
+        <div class="row source-main" >
+                <h1 class="pb-2">Source</h1>
+                <h4>Select a source playlist</h4>
+
+                {% for playlists in savedPlaylists %}
+                    <div class="col"> 
+                        <div class="image-div onclick-source" data-id={{playlists.id}} data-name={{playlists.name}} data-image={{playlists.cover.url}} data-snapshotId={{playlists.snapshotId}}>
+                            <img src={{playlists.cover.url}} class="image-thumbnail" alt="user image">
+                        </div>
+                    </div>
+                    <div class="col pt-4 ">
+                        <span class="playlist-name onclick-source" data-id={{playlists.id}} data-name={{playlists.name}} data-image={{playlists.cover.url}} data-image={{playlists.cover.url}} data-snapshotId={{playlists.snapshotId}}>
+                            {{playlists.name}}
+                        </span>
+                    </div>
+                {% endfor %}
+
+                <div class="col"> 
+                    <div class="image-div onclick-source" data-id="liked" data-name="liked" data-image="static/likedIcon.png" data-snapshotId="liked">
+                        <img src="static/likedIcon.png" class="image-thumbnail" alt="user image">
+                    </div>
+                </div>
+                <div class="col pt-4 ">
+                    <span class="playlist-name onclick-source" data-id="liked" data-name="liked" data-image="static/likedIcon.png" data-snapshotId="liked">
+                        Liked Songs
+                    </span>
+                </div>
+                
+        </div>
+        <form action="{{url_for('playlists')}}" method="post">
+            <div class="row target-main" >
+                <h1 class="pb-2">Target</h1>
+                <h4>Select a target playlist</h4>
+                
+                {% for playlists in savedPlaylists %}
+                <div class="col"> 
+                    <div class="image-div onclick-target" data-id={{playlists.id}} data-name='{{playlists.name}}'' data-image={{playlists.cover.url}} data-snapshotId={{playlists.snapshotId}}>
+                        <img src={{playlists.cover.url}} class="image-thumbnail" alt="user image">
+                    </div>
+                </div>
+                <div class="col pt-4">
+                    <span class="playlist-name onclick-target" data-id={{playlists.id}} data-name={{playlists.name}} data-image={{playlists.cover.url}} data-snapshotId={{playlists.snapshotId}}>
+                        {{playlists.name}}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
 {% endblock %}

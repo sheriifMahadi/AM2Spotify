@@ -37,3 +37,54 @@ ul > .ms-3 {
 .overflow-auto{
     height: 300px;
 }
+
+.image-thumbnail{
+    width: 140px;
+    height: 140px;
+    margin: auto auto 16px;
+}
+
+.playlist-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1c9e40;
+}
+
+
+.onclick-source:hover, .onclick-target:hover{
+    cursor: pointer;  
+}
+    
+@media only screen and (min-width:1024px) and (max-width:1200px) { 
+    .image-thumbnail{
+        width: 170px;
+        height: 170px;
+    }
+
+}
+
+@media only screen and (min-width:1201px) and (max-width:1899px) { 
+    .image-thumbnail{
+        width: 210px;
+        height: 210px;
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:1023px)  {
+    .image-thumbnail{
+        width: 180px;
+        height: 180px;
+    }
+
+}
+
+@media only screen and (min-width:500px) and (max-width:767px)  {
+    .image-thumbnail{
+        width: 110px;
+        height: 110px;
+    }
+}
+
+
+
