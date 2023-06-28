@@ -2,5 +2,46 @@
 {% block title %} Tutorial {% endblock %}
 
 {% block body%}
-{{getTopTracks}}
+    <h1>Steps to transfer songs from apple music to spotify</h1>
+    <ul>
+        <li>
+            <p>
+                You'll need a json file containing the songs. You can request your personal data from apple, extract it and get the json file containing the songs in your library.<br/>
+                <a href="https://9to5mac.com/2018/10/17/request-your-personal-data-from-apple/">How to request Your personal data from apple</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                Next step is to upload said file into Am2Spotify and go back to import url then wait for it to search and load the songs from the file. This step might take a while 
+                for json files with lots of songs. 
+            </p>
+        </li>
+        <li>
+            <p>
+               Select the songs you wish to import and it'll create a new playlist containing the imported songs. 
+            </p>
+        </li>
+    </ul>
+    <h1>Steps to transfer songs between playlists</h1>
+    <ul>
+        <li>
+            <p>
+                First step is to select the source playlist then the target playlist.
+
+            </p>
+        </li>
+        <li>
+            <p>
+                You'll be redirected to the transfer page where you select songs you wish to import.
+
+            </p>
+        </li>
+        
+        <li>
+            <p>
+                Select either copy or move. Copy keeps the source playlist, while transfer deletes it. 
+            </p>
+        </li>
+    </ul>
+
 {% endblock %}

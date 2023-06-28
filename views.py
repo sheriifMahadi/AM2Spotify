@@ -148,8 +148,7 @@ def transfer():
 	status=status)
 
 def tutorial():
-	topTracksShort = session['current_user']['id']
-	return render_template('tutorial.html', getTopTracks=topTracksShort)
+	return render_template('tutorial.html')
 
 @check_login_status
 def login():

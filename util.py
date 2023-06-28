@@ -216,7 +216,7 @@ def searchForSongs(session, uploadedJson):
 	tracks = []
 	tracksId = ""
 	#  Search from songs from Json file and add to library
-	for song in songs[0:125]: # Looping Json file
+	for song in songs: # Looping Json file
 		params = { # Search params taken from json file
 			'q': song,
 			'type': 'track',
